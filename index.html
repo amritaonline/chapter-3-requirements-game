@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="An interactive Chapter 3 puzzle for learning BI requirement components, definitions, and examples."
+    />
+    <title>Requirement Rescue | Chapter 3 BI Puzzle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Nunito:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#game-main">Skip to game</a>
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Requirement Rescue home">
+        <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M9 8h21l9 9v23H9z" />
+          <path d="M30 8v10h9M16 25h16M16 32h11" />
+          <path class="mark-accent" d="m14 17 3 3 6-7" />
+        </svg>
+        <span>
+          <strong>Requirement Rescue</strong>
+          <small>Chapter 3 Puzzle Lab</small>
+        </span>
+      </a>
+      <nav class="header-actions" aria-label="Game controls">
+        <button class="icon-button" id="sound-toggle" type="button" aria-label="Mute sound" title="Mute sound">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M11 5 6 9H3v6h3l5 4zM15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" />
+          </svg>
+        </button>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Change theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" />
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <main id="game-main">
+      <section class="screen active" id="start-screen" aria-labelledby="game-title">
+        <div class="hero-copy">
+          <p class="eyebrow">BI  •  CHAPTER 3  •  LOW-STAKES PRACTICE</p>
+          <h1 id="game-title">A BI project is in trouble.<br /><span>Sort the requirements.</span></h1>
+          <p class="hero-text">
+            Learn six requirement components, connect each one to its definition, and classify realistic
+            project evidence before the team signs off.
+          </p>
+          <div class="hero-actions">
+            <button class="primary-button" id="start-button" type="button">
+              Open the case
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </button>
+            <button class="text-button" id="study-button" type="button">Study the requirement map</button>
+            <a class="print-link" href="print.html" target="_blank" rel="noopener">Printable worksheet</a>
+          </div>
+          <ul class="mission-facts" role="list">
+            <li><strong>2</strong><span>puzzle rounds</span></li>
+            <li><strong>18</strong><span>total matches</span></li>
+            <li><strong>∞</strong><span>retries allowed</span></li>
+          </ul>
+        </div>
+        <aside class="case-file" aria-label="Mission briefing">
+          <div class="folder-tab">CASE #03</div>
+          <p class="stamp">REQUIREMENTS AT RISK</p>
+          <h2>Mission briefing</h2>
+          <p>
+            Twelve case notes from different industries mixed together business needs, data problems,
+            system functions, compliance rules, technology constraints, and old-report logic.
+          </p>
+          <div class="briefing-note">
+            <span>YOUR TASK</span>
+            <p>Restore the requirement file before development begins.</p>
+          </div>
+          <svg class="file-lines" viewBox="0 0 360 100" aria-hidden="true">
+            <path d="M4 16h352M4 48h270M4 80h318" />
+            <circle cx="330" cy="48" r="22" />
+            <path d="m320 48 7 7 14-17" />
+          </svg>
+        </aside>
+      </section>
+
+      <section class="screen" id="study-screen" aria-labelledby="study-title">
+        <div class="screen-heading">
+          <div>
+            <p class="eyebrow">REFERENCE FILE</p>
+            <h1 id="study-title">The six requirement components</h1>
+            <p>Read the map, then close it and retrieve the ideas from memory.</p>
+          </div>
+          <button class="secondary-button" id="close-study" type="button">Return to mission</button>
+        </div>
+        <div class="study-grid" id="study-grid"></div>
+      </section>
+
+      <section class="screen" id="game-screen" aria-labelledby="round-title">
+        <div class="game-header">
+          <div>
+            <p class="eyebrow" id="round-label">ROUND 1 OF 2</p>
+            <h1 id="round-title">Connect names to definitions</h1>
+          </div>
+          <div class="game-stats" aria-label="Current game statistics">
+            <div><span>Score</span><strong id="score">0</strong></div>
+            <div><span>Streak</span><strong id="streak">0</strong></div>
+          </div>
+        </div>
+        <div class="progress-track" aria-label="Game progress">
+          <span id="progress-bar"></span>
+        </div>
+
+        <div id="round-one" class="round-panel">
+          <p class="instruction">
+            Select a component, then select its definition. Correct pairs lock together.
+          </p>
+          <div class="match-board">
+            <section aria-labelledby="component-heading">
+              <h2 id="component-heading">Component files</h2>
+              <div class="match-column" id="name-column"></div>
+            </section>
+            <div class="connector" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <section aria-labelledby="definition-heading">
+              <h2 id="definition-heading">Definitions</h2>
+              <div class="match-column" id="definition-column"></div>
+            </section>
+          </div>
+        </div>
+
+        <div id="round-two" class="round-panel hidden">
+          <div class="case-progress">
+            <span id="case-count">Evidence 1 of 12</span>
+            <span id="case-points">Worth 50 points</span>
+          </div>
+          <article class="evidence-card" aria-live="polite">
+            <div class="evidence-topline">
+              <span id="evidence-type">PROJECT NOTE</span>
+              <span id="evidence-industry">BI PROJECT FILE</span>
+            </div>
+            <blockquote id="case-text"></blockquote>
+            <p id="case-prompt">Which requirement component does this belong to?</p>
+          </article>
+          <div class="category-grid" id="category-grid" aria-label="Requirement categories"></div>
+        </div>
+
+        <div class="feedback-bar" id="feedback" aria-live="polite">
+          <span class="feedback-icon" aria-hidden="true">?</span>
+          <p>Select your first match to begin.</p>
+          <button class="hint-button" id="hint-button" type="button">Use a hint</button>
+        </div>
+      </section>
+
+      <section class="screen" id="result-screen" aria-labelledby="result-title">
+        <div class="result-card">
+          <div class="result-seal" id="result-seal" aria-hidden="true">
+            <svg viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="36" />
+              <path d="m23 41 11 11 24-28" />
+            </svg>
+          </div>
+          <p class="eyebrow">CASE CLOSED</p>
+          <h1 id="result-title">Requirements restored</h1>
+          <p id="result-message"></p>
+          <div class="result-score">
+            <strong id="final-score">0</strong>
+            <span>points earned</span>
+          </div>
+          <div class="mastery-grid">
+            <div><strong id="accuracy-value">0%</strong><span>accuracy</span></div>
+            <div><strong id="best-streak">0</strong><span>best streak</span></div>
+            <div><strong id="hints-used">0</strong><span>hints used</span></div>
+          </div>
+          <div class="review-box" id="review-box"></div>
+          <div class="result-actions">
+            <button class="primary-button" id="play-again" type="button">Play again</button>
+            <button class="secondary-button" id="review-map" type="button">Review the map</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Business Intelligence • Chapter 3</span>
+      <span>Defining Requirements: Business, Data, and Quality</span>
+    </footer>
+  <script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>

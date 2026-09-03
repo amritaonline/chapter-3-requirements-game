@@ -1,0 +1,374 @@
+:root {
+  --ink: #172b3b;
+  --muted: #65727b;
+  --paper: #fffdf7;
+  --canvas: #ece9e0;
+  --line: #b9b7b0;
+  --teal: #087f78;
+  --gold: #e5a52b;
+  --pale: #f6f1e5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--canvas);
+  font-family: "Nunito", sans-serif;
+  font-size: 11pt;
+  line-height: 1.4;
+}
+
+.utility-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem max(1rem, calc((100% - 8.5in) / 2));
+  color: white;
+  background: var(--ink);
+}
+
+.utility-bar a {
+  color: white;
+}
+
+.utility-bar p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.utility-bar button {
+  min-height: 44px;
+  padding: 0.6rem 1rem;
+  color: white;
+  background: var(--teal);
+  border: 1px solid #72c7bf;
+  border-radius: 0.4rem;
+  font: 800 0.9rem "Nunito", sans-serif;
+  cursor: pointer;
+}
+
+main {
+  width: min(calc(100% - 2rem), 8.5in);
+  margin: 2rem auto;
+  padding: 0.55in;
+  background: var(--paper);
+  box-shadow: 0 10px 30px rgba(23, 43, 59, 0.14);
+}
+
+.worksheet-header {
+  position: relative;
+  padding-bottom: 0.25in;
+  border-bottom: 2px solid var(--ink);
+}
+
+.course-label {
+  display: flex;
+  gap: 0.12in;
+  align-items: center;
+}
+
+.course-label svg {
+  width: 0.42in;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.3;
+}
+
+.course-label .accent {
+  stroke: var(--teal);
+  stroke-width: 3;
+}
+
+.course-label div {
+  display: grid;
+}
+
+.course-label span,
+.case-number,
+.section-heading span,
+.case-meta {
+  font-family: "DM Mono", monospace;
+  font-size: 8.5pt;
+  letter-spacing: 0.05em;
+}
+
+.course-label strong {
+  font-size: 10pt;
+}
+
+.case-number {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.08in 0.12in;
+  border: 1px solid var(--ink);
+}
+
+h1 {
+  margin: 0.22in 0 0;
+  font-size: 28pt;
+  line-height: 1;
+}
+
+.subtitle {
+  margin: 0.06in 0 0;
+  color: var(--muted);
+}
+
+.student-fields {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.18in;
+  margin-top: 0.23in;
+  font-size: 9.5pt;
+  font-weight: 800;
+}
+
+.student-fields label {
+  display: flex;
+  gap: 0.08in;
+}
+
+.student-fields span {
+  flex: 1;
+  border-bottom: 1px solid var(--ink);
+}
+
+section {
+  margin-top: 0.28in;
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 0.08in;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-heading span {
+  color: var(--teal);
+  font-weight: 500;
+}
+
+h2 {
+  margin: 0.03in 0 0;
+  font-size: 17pt;
+  line-height: 1.15;
+}
+
+.section-heading > strong {
+  font-family: "DM Mono", monospace;
+  font-size: 9pt;
+}
+
+.directions {
+  margin: 0.1in 0 0.16in;
+  color: var(--muted);
+  font-size: 9.5pt;
+}
+
+.matching-layout {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 0.22in;
+}
+
+.matching-layout > div {
+  padding: 0.16in;
+  background: var(--pale);
+  border: 1px solid var(--line);
+}
+
+h3 {
+  margin: 0 0 0.08in;
+  font-size: 10pt;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.terms ol,
+.definitions ol {
+  margin: 0;
+  padding-left: 0.22in;
+}
+
+.terms li,
+.definitions li {
+  margin-bottom: 0.1in;
+  padding-left: 0.03in;
+  font-size: 9pt;
+}
+
+.answer-blank {
+  display: inline-block;
+  width: 0.3in;
+  margin-right: 0.04in;
+  border-bottom: 1px solid var(--ink);
+}
+
+.category-key {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.07in 0.12in;
+  margin-bottom: 0.18in;
+  padding: 0.12in;
+  background: var(--pale);
+  border: 1px solid var(--line);
+  font-size: 9pt;
+}
+
+.category-key span {
+  display: flex;
+  gap: 0.05in;
+  align-items: center;
+}
+
+.category-key b {
+  display: inline-grid;
+  width: 0.22in;
+  height: 0.22in;
+  place-items: center;
+  color: white;
+  background: var(--teal);
+  border-radius: 50%;
+  font-family: "DM Mono", monospace;
+  font-size: 8pt;
+}
+
+.cases {
+  margin: 0;
+  padding-left: 0.28in;
+}
+
+.cases > li {
+  margin-bottom: 0.15in;
+  padding: 0.13in 0.15in;
+  border: 1px solid var(--line);
+  break-inside: avoid;
+}
+
+.case-meta {
+  display: flex;
+  justify-content: space-between;
+  color: var(--teal);
+  font-weight: 500;
+}
+
+.cases p {
+  margin: 0.07in 0 0.09in;
+  font-size: 9.5pt;
+  font-weight: 700;
+}
+
+.response-line {
+  display: grid;
+  grid-template-columns: auto 0.42in auto 1fr;
+  gap: 0.05in;
+  align-items: end;
+  color: var(--muted);
+  font-size: 8.5pt;
+}
+
+.response-line span {
+  min-height: 0.16in;
+  border-bottom: 1px solid var(--line);
+}
+
+.reflection > p {
+  margin: 0.12in 0;
+  font-size: 9.5pt;
+}
+
+.writing-lines {
+  display: grid;
+  gap: 0.18in;
+}
+
+.writing-lines span {
+  border-bottom: 1px solid var(--line);
+}
+
+.worksheet-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.28in;
+  padding-top: 0.1in;
+  border-top: 2px solid var(--ink);
+  font: 500 8.5pt "DM Mono", monospace;
+}
+
+@media (max-width: 700px) {
+  .utility-bar p {
+    display: none;
+  }
+
+  main {
+    width: min(calc(100% - 1rem), 8.5in);
+    margin: 0.5rem auto;
+    padding: 1rem;
+  }
+
+  .matching-layout,
+  .category-key {
+    grid-template-columns: 1fr;
+  }
+
+  .student-fields {
+    grid-template-columns: 1fr;
+  }
+}
+
+@page {
+  size: letter;
+  margin: 0.45in;
+}
+
+@media print {
+  body {
+    color: #000;
+    background: white;
+    font-size: 10pt;
+  }
+
+  .utility-bar {
+    display: none;
+  }
+
+  main {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .page-break {
+    break-before: page;
+  }
+
+  .cases > li {
+    border-color: #777;
+  }
+
+  .category-key,
+  .matching-layout > div {
+    background: #f2f2f2;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
